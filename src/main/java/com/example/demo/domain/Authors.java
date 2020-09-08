@@ -6,12 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Books {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+public class Authors {
+        @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String name; // название книги
+    private String name;
 
     public Integer getId() {
         return id;
