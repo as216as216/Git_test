@@ -6,13 +6,12 @@
 <html lang="en">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <body>
-    <h1> Страница Книги3</h1>
-    <c:forEach var="book" items="${books}">
+    <h1> Страница Авторы3</h1>
+    <c:forEach var="author" items="${authors}">
         <div>
-            <a href="/books3/authors3?bookId=${book.id}">${book.name}</a>
+            <li>${author.name}</li>
         </div>
     </c:forEach>
-
     </body>
 </html>
 </root>
