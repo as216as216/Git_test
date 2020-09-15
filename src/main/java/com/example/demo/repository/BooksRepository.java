@@ -9,7 +9,8 @@ import java.util.List;
 public interface BooksRepository extends CrudRepository<Books, Integer> {
     List<Books> findAllByName (String name);
 
-    @Query(value = "select * from \"BOOKS\"", nativeQuery = true)
+//    @Query(value = "select * from  \"BOOKS\"", nativeQuery = true)
+    @Query(value = "select * from  \"public\".\"BOOKS\"", nativeQuery = true)
         //если и этого мало - можно написать запрос на чистом SQL и все это будет работать
     List<Books> findAllAS();
 }
