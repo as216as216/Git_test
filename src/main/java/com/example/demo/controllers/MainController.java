@@ -31,6 +31,7 @@ public class MainController {
     @GetMapping("/books")
     public String main(Map<String, Object> model) {
         Iterable<Books> books = booksRepository.findAllAS();
+//        Iterable<Books> books = booksRepository.finbooksAS();
         model.put("books", books);
 
         String s1 = "Привет из Контроллера";
@@ -39,30 +40,9 @@ public class MainController {
     }
 
     @GetMapping("books/authors")
-    public String authors(Map<String, Object> model,@RequestParam(value = "bookId") String bookId) {
+    public String authors(Map<String, Object> model, @RequestParam(value = "bookId") String bookId) {
         Iterable<Authors> authors = authorsRepository.findByBookID(bookId);
         model.put("authors", authors);
         return "authors";
-
     }
-
-    @GetMapping("/books3")
-    public String books3(Map<String, Object> model) {
-        Iterable<Books> books = booksRepository.findAllAS();
-        model.put("books", books);
-
-        String s1 = "Привет из Контроллера";
-        model.put("s1", s1);
-        return "books3";
-    }
-
-    @GetMapping("books3/authors3")
-    public String authors3(Map<String, Object> model,@RequestParam(value = "bookId") String bookId) {
-        Iterable<Authors> authors = authorsRepository.findByBookID(bookId);
-        model.put("authors", authors);
-        return "authors3";
-
-    }
-
-
 }

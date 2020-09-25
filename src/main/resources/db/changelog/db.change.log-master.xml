@@ -6,23 +6,63 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <!--<preConditions>-->
-        <!--<dbms type="mysql"/>-->
+    <!--<dbms type="mysql"/>-->
     <!--</preConditions>-->
 
     <!--<changeSet id="0" author="as216">-->
-        <!--<tagDatabase tag="db_init"/>-->
+    <!--<tagDatabase tag="db_init"/>-->
     <!--</changeSet>-->
 
-    <!--<include file="v-1.0/db.changelog-v.1.0.xml" relativeToChangelogFile="true"/>-->
+    <changeSet id="0" author="as216" runOnChange="true">
 
-    <!--<changeSet id="4" author="as216">-->
-        <!--<tagDatabase tag="v.1.0"/>-->
-    <!--</changeSet>-->
 
-    <!--<include file="v-2.0/db.changelog-v.2.0.xml" relativeToChangelogFile="true"/>-->
+        <!-- Drop tables if exists -->
+        <!--<sql splitStatements="true">-->
+        <!--DROP TABLE IF EXISTS "BOOKS" CASCADE;-->
+        <!--DROP TABLE IF EXISTS "AUTHORS" CASCADE;-->
+        <!--</sql>-->
 
-    <!--<changeSet id="11" author="aleks_ush">-->
-        <!--<tagDatabase tag="v.2.0"/>-->
-    <!--</changeSet>-->
+        <!-- Create tables -->
+        <createTable tableName="BOOKS">
+            <column name="ID" type="varchar(5)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="Name" type="varchar(50)">
+                <!--<constraints nullable="false"/>-->
+            </column>
+        </createTable>
+
+        <!--<addAutoIncrement columnName="ID" tableName="BOOKS" columnDataType="int" incrementBy="1" startWith="0"/>-->
+
+        <createTable tableName="AUTHORS">
+            <column name="ID" type="varchar(5)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="Name" type="varchar(50)">
+            </column>
+            <column name="Bookid" type="varchar(5)">
+                <!--<constraints nullable="false"-->
+                <!--foreignKeyName="FK_Region_City"-->
+                <!--referencedTableName="Region" referencedColumnNames="nID" deleteCascade="true"/>-->
+            </column>
+        </createTable>
+        <!--<modifySql>-->
+        <!--<replace replace="filter" with="FILTER"/>-->
+        <!--</modifySql>-->
+
+
+        <!--<addAutoIncrement columnName="ID" tableName="AUTHORS" columnDataType="int" incrementBy="1" startWith="1000"/>-->
+
+        <!--Loading of Data-->
+        <loadData encoding="UTF-8" file="db/changelog/books.csv" tableName="books" separator=";">
+            <column name="ID" type="STRING"/>
+            <column name="Name" type="STRING"/>
+        </loadData>
+        <loadData encoding="UTF-8" file="db/changelog/authors.csv" tableName="authors" separator=";">
+            <column name="ID" type="STRING"/>
+            <column name="Name" type="STRING"/>
+            <column name="Bookid" type="STRING"/>
+        </loadData>
+    </changeSet>
 
 </databaseChangeLog>

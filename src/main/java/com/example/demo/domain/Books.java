@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Books {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String name; // название книги

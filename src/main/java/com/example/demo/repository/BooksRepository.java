@@ -7,10 +7,12 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface BooksRepository extends CrudRepository<Books, Integer> {
-    List<Books> findAllByName (String name);
+    @Query("select b from books b")
+    List<Books> finbooksAS();
 
-//    @Query(value = "select * from  \"BOOKS\"", nativeQuery = true)
-    @Query(value = "select * from  \"public\".\"BOOKS\"", nativeQuery = true)
-        //если и этого мало - можно написать запрос на чистом SQL и все это будет работать
-    List<Books> findAllAS();
+//    @Query(value = "select * from  \"books\"", nativeQuery = true)
+//        List<Books> findAllAS();
+
+    @Query(value = "select * from  \"public\".\"books\"", nativeQuery = true)
+        List<Books> findAllAS();
 }

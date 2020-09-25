@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Authors {
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
