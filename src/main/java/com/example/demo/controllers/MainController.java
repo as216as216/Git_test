@@ -30,8 +30,8 @@ public class MainController {
 
     @GetMapping("/books")
     public String main(Map<String, Object> model) {
-        Iterable<Books> books = booksRepository.findAllAS();
-//        Iterable<Books> books = booksRepository.finbooksAS();
+//        Iterable<Books> books = booksRepository.findAllAS();
+        Iterable<Books> books = booksRepository.finbooksAS();
         model.put("books", books);
 
         String s1 = "Привет из Контроллера";
