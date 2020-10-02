@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <body>
     <h1> Страница Авторы3</h1>
-    <c:forEach var="author" items="${authors}">
+    <c:forEach items="${authors}" var="author">
         <div>
             <li>${author.name}</li>
         </div>

@@ -30,9 +30,7 @@ public class MainController {
 
     @GetMapping("/books")
     public String main(Map<String, Object> model) {
-//        Iterable<Books> books = booksRepository.findAllAS();
-        Iterable<Books> books = booksRepository.finbooksAS();
-//        Iterable<Books> books = booksRepository.findAll();
+        Iterable<Books> books = booksRepository.findAll();
         model.put("books", books);
 
         String s1 = "Привет из Контроллера";
@@ -41,7 +39,7 @@ public class MainController {
     }
 
     @GetMapping("books/authors")
-    public String authors(Map<String, Object> model, @RequestParam(value = "bookId") String bookId) {
+    public String authors(Map<String, Object> model, @RequestParam(value = "bookId") Integer bookId) {
         Iterable<Authors> authors = authorsRepository.findByBookID(bookId);
         model.put("authors", authors);
         return "authors";

@@ -12,6 +12,7 @@ public class Authors {
     private Integer id;
 
     private String name;
+    private Integer bookid;
 
     public Integer getId() {
         return id;
@@ -19,5 +20,9 @@ public class Authors {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getBookid() {
+        return bookid;
     }
 }
