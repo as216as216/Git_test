@@ -1,25 +1,29 @@
 package com.example.demo.controllers;
 
-import com.example.demo.domain.Authors;
-import com.example.demo.domain.Books;
-import com.example.demo.repository.AuthorsRepository;
-import com.example.demo.repository.BooksRepository;
+import com.example.demo.models.Authors;
+import com.example.demo.models.Books;
+import com.example.demo.services.AuthorsService;
+import com.example.demo.services.BooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class MainController {
+    private final BooksService booksService;
+    private final AuthorsService authorsService;
 
     @Autowired
-    private BooksRepository booksRepository;
-
-    @Autowired
-    private AuthorsRepository authorsRepository;
+    public MainController(BooksService booksService, AuthorsService authorsService) {
+        this.booksService = booksService;
+        this.authorsService = authorsService;
+    }
 
     @GetMapping("/")
     public String home(Model model) {
@@ -29,18 +33,40 @@ public class MainController {
     }
 
     @GetMapping("/books")
-    public String main(Map<String, Object> model) {
-        Iterable<Books> books = booksRepository.findAll();
-        model.put("books", books);
+    public String books(Model model) {
+//        List<Books> books = booksService.findAll();
+        List<Books> books = booksService.findAllGroupped();
+//        model.put("books", books);
+        model.addAttribute("books", books);
 
         String s1 = "Привет из Контроллера";
-        model.put("s1", s1);
+        model.addAttribute("s1", s1);
         return "books";
+    }
+
+    @GetMapping("/book/create")
+    public String bookCreateForm(Model model){
+        List<Authors> allAuthors = authorsService.findAll();
+        model.addAttribute("allAuthors", allAuthors);
+        return "bookCreateForm";
+    }
+
+    @PostMapping("/book/create")
+    public String bookCreate(@RequestParam String bookName, @RequestParam int[] authorsList ){
+        Books newBook = new Books(bookName, "1", "1");
+        booksService.saveBook(newBook);
+        return "redirect:/books";
+    }
+
+    @GetMapping("/books/delete")
+    public String bookDelete(@RequestParam int bookId){
+        booksService.deleteById(bookId);
+        return "redirect:/books";
     }
 
     @GetMapping("books/authors")
     public String authors(Map<String, Object> model, @RequestParam(value = "bookId") Integer bookId) {
-        Iterable<Authors> authors = authorsRepository.findByBookID(bookId);
+        List<Authors> authors = authorsService.findByBookID(bookId);
         model.put("authors", authors);
         return "authors";
     }
