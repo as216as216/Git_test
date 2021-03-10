@@ -5,7 +5,9 @@ import com.example.demo.repository.AuthorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorsService {
@@ -16,7 +18,10 @@ public class AuthorsService {
         this.authorsRepository = authorsRepository;
     }
 
-    public List<Authors> findByBookID(int id){
+    @Autowired
+    EntityManager em;
+
+    public List<Authors> findByBookID(Integer id){
         return authorsRepository.findByBookID(id);
     }
 
@@ -26,6 +31,18 @@ public class AuthorsService {
 
     public List<Authors> findAll(){
         return authorsRepository.findAll();
+    }
+
+    public Optional<Authors> findById(Integer authorId){
+        return authorsRepository.findById(authorId);
+    }
+
+    public List<Authors> findAllById(List<Integer> authorsIds){
+        return authorsRepository.findAllById(authorsIds);
+    }
+
+    public void deleteById(Integer authorId){
+        authorsRepository.deleteById(authorId);
     }
 
 }

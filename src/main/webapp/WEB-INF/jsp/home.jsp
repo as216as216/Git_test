@@ -12,6 +12,8 @@
 
     <br>
     <a href="/books">Каталог книг</a>
+    <br>
+    <a href="/authors">Справочник авторов</a>
 
 
     </body>

@@ -19,22 +19,21 @@
 
 
     <body>
-    <h1>Справочник книг</h1>
-    <br>
+    <h1>Справочник авторов</h1>
+    <a href="/">Главная</a><br><br>
     <div>
-        <a href="/">Главная</a><br><br>
-        <a href="/book/create" class="btn btn-primary">Добавить книгу</a>
+        <a href="/author/create" class="btn btn-primary">Добавить автора</a>
     </div>
     <br>
     <table>
         <tr>
-            <th>Наименование</th>
+            <th>ФИО</th>
         </tr>
-        <c:forEach var="book" items="${books}">
+        <c:forEach var="author" items="${authorsList}">
             <tr>
-                <td><a href="/books/authors?bookId=${book.id}">${book.name}</a></td>
-                <td><a class="btn btn-warning" href="/books/edit?bookId=${book.id}">Редактировать</a></td>
-                <td><a class="btn btn-danger"href="/books/delete?bookId=${book.id}">Удалить</a></td>
+                <td>${author.name}</td>
+                <td><a class="btn btn-warning" href="/author/edit?authorId=${author.id}">Редактировать</a></td>
+                <td><a class="btn btn-danger"href="/author/delete?authorId=${author.id}">Удалить</a></td>
             </tr>
         </c:forEach>
     </table>

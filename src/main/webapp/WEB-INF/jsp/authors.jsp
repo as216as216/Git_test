@@ -6,8 +6,14 @@
     <html lang="en">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <body>
-    <h1> Страница Авторы3</h1>
-    <c:forEach items="${authors}" var="author">
+    <h1> Страница Авторы</h1>
+    <a href="/">Главная</a>
+    <div>
+        <b>${curBook.name}</b>
+        <br>
+        <br>
+    </div>
+    <c:forEach items="${curBook.bookAuthors}" var="author">
         <div>
             <li>${author.name}</li>
         </div>

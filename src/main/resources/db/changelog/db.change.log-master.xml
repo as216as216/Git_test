@@ -12,8 +12,6 @@
             </column>
             <column name="name" type="varchar(50)">
             </column>
-            <column name="authorid" type="NUMERIC">
-            </column>
         </createTable>
 
         <addAutoIncrement columnName="id" tableName="books" columnDataType="NUMERIC" incrementBy="1" startWith="1"/>
@@ -32,12 +30,17 @@
         <loadData encoding="UTF-8" file="db/changelog/books.csv" tableName="books" separator=";">
             <column name="id" type="NUMERIC"/>
             <column name="name" type="STRING"/>
-            <column name="authorid" type="NUMERIC"/>
         </loadData>
+
         <loadData encoding="UTF-8" file="db/changelog/authors.csv" tableName="authors" separator=";">
             <column name="id" type="NUMERIC"/>
             <column name="name" type="STRING"/>
          </loadData>
+
+        <!--<loadData encoding="UTF-8" file="db/changelog/books_book_authors.csv" tableName="books_book_authors" separator=";">-->
+            <!--<column name="authors_books_id" type="NUMERIC"/>-->
+            <!--<column name="book_authors_id" type="NUMERIC"/>-->
+         <!--</loadData>-->
     </changeSet>
 
 </databaseChangeLog>

@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -11,12 +12,6 @@ public class Books {
 
     @Column(name = "name")
     private String name; // название книги
-
-    @Column(name = "authorid")
-    private String authorid;
-
-    @Column (name = "bookid")
-    public String bookid;
 
     public Integer getId() {
         return id;
@@ -29,17 +24,27 @@ public class Books {
     public Books() {
     }
 
-    public String getAuthorid() {
-        return authorid;
-    }
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<Authors> bookAuthors;
 
-    public String getBookid() {
-        return bookid;
-    }
-
-    public Books(String name, String authorid, String bookid) {
+    public Books(String name, String authorid, Integer bookid) {
         this.name = name;
-        this.authorid = authorid;
-        this.bookid = bookid;
+    }
+
+    public Books(String name, List<Authors> bookAuthors) {
+        this.name = name;
+        this.bookAuthors = bookAuthors;
+    }
+
+    public List<Authors> getBookAuthors() {
+        return bookAuthors;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBookAuthors(List<Authors> bookAuthors) {
+        this.bookAuthors = bookAuthors;
     }
 }
