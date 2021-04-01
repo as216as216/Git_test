@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,22 +23,13 @@ public class BooksService {
 
     public List<Books> findAll(){
         return booksRepository.findAll();
-
     }
 
-//    public List<Books> findAllGroupped(){
-//        return booksRepository.findAllGroupped();
-//    }
-
-//    public Books saveBook(Books book){
-//        return booksRepository.save(book);
-//    }
     public void saveBook(Books book){
         booksRepository.save(book);
     }
 
     public void deleteById(Integer book){
-//        booksRepository.deleteById(bookId);
         booksRepository.deleteById(book);
     }
     public Optional<Books> findById(Integer bookid){

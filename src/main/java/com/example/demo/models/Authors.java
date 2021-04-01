@@ -13,13 +13,7 @@ public class Authors {
     @Column(name = "name")
     private String name;
 
-//    @OneToMany (mappedBy="address", fetch=FetchType.EAGER)
-//    private Collection<Person> tenants;
-
-//    @OneToOne(optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "PASSPORT_ID")
-
-    @ManyToMany(mappedBy = "bookAuthors",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "bookAuthors",fetch = FetchType.LAZY)
     public List<Books> authorsBooks;
 
     public Integer getId() {

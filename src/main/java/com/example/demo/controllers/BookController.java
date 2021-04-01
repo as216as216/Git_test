@@ -4,7 +4,6 @@ import com.example.demo.models.Authors;
 import com.example.demo.models.Books;
 import com.example.demo.services.AuthorsService;
 import com.example.demo.services.BooksService;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,24 +63,10 @@ public class BookController {
         return "bookEditForm";
     }
 
-//    @PostMapping("/books/edit}")
-//    public String bookEdit(@RequestParam Integer bookId, @RequestParam String bookName, @RequestParam List<Integer> authorsList ){
-//        List<Authors> newBookAuthors = authorsService.findAllById(authorsList);
-//        Books updBook = booksService.findById(bookId).get();
-////        Books updBook = booksService.findById(bookId).orElseThrow(ArithmeticException::new);
-////        Books updBook = booksService.findById(bookId).orElseThrow(NotFoundException::new);
-//        updBook.setName(bookName);
-//        updBook.setBookAuthors(newBookAuthors);
-//        booksService.saveBook(updBook);
-//        return "redirect:/books";
-//    }
-
     @PostMapping("/books/edit")
     public String bookEdit(@RequestParam Integer bookId, @RequestParam String bookName, @RequestParam List<Integer> authorsList){
         List<Authors> newBookAuthors = authorsService.findAllById(authorsList);
         Books updBook = booksService.findById(bookId).get();
-//        Books updBook = booksService.findById(bookId).orElseThrow(ArithmeticException::new);
-//        Books updBook = booksService.findById(bookId).orElseThrow(NotFoundException::new);
         updBook.setName(bookName);
         updBook.setBookAuthors(newBookAuthors);
         booksService.saveBook(updBook);

@@ -21,10 +21,6 @@ public class AuthorsService {
     @Autowired
     EntityManager em;
 
-    public List<Authors> findByBookID(Integer id){
-        return authorsRepository.findByBookID(id);
-    }
-
     public Authors saveAuthor(Authors author){
         return authorsRepository.save(author);
     }
