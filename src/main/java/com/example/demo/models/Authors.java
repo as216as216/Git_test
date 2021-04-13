@@ -27,4 +27,7 @@ public class Authors {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Authors() {
+    }
 }

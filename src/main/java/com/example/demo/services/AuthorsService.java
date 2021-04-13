@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.dto.AuthorDTO;
+import com.example.demo.mappers.AuthorMapper;
 import com.example.demo.models.Authors;
 import com.example.demo.repository.AuthorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +14,30 @@ import java.util.Optional;
 @Service
 public class AuthorsService {
     private final AuthorsRepository authorsRepository;
+    private final EntityManager em;
 
     @Autowired
-    public AuthorsService(AuthorsRepository authorsRepository) {
+    public AuthorsService(AuthorsRepository authorsRepository, EntityManager em) {
         this.authorsRepository = authorsRepository;
+        this.em = em;
     }
 
-    @Autowired
-    EntityManager em;
-
-    public Authors saveAuthor(Authors author){
-        return authorsRepository.save(author);
+    public void saveAuthor(Integer authorId, String authorName){
+        if (authorId == 0) { // создаём нового автора
+            Authors author = new Authors();
+            author.setName(authorName); // не понимаю, почему, если эту строку вынести за пределы if, то IDEA ругается
+            authorsRepository.save(author);
+        }
+        else { // редактируем автора
+            Authors author = this.findById(authorId).get();
+            author.setName(authorName); // не понимаю, почему, если эту строку вынести за пределы if, то IDEA ругается
+            authorsRepository.save(author);
+        }
     }
 
-    public List<Authors> findAll(){
-        return authorsRepository.findAll();
+    public AuthorDTO findAll(){
+        List<Authors> authors = authorsRepository.findAll();
+        return AuthorMapper.INSTANCE.toDTO(authors);
     }
 
     public Optional<Authors> findById(Integer authorId){

@@ -24,7 +24,7 @@ public class Books {
     public Books() {
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Authors> bookAuthors;
 
     public Books(String name, String authorid, Integer bookid) {

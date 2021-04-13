@@ -34,9 +34,7 @@ public class AuthorController {
 
     @PostMapping("/author/create")
     public String authorAdd(@RequestParam String authorName){
-        Authors newAuthor = new Authors();
-        newAuthor.setName(authorName);
-        authorsService.saveAuthor(newAuthor);
+        authorsService.saveAuthor(0, authorName);
         return "redirect:/authors";
     }
 
@@ -55,9 +53,10 @@ public class AuthorController {
 
     @PostMapping("/author/edit")
     public String authorEdit(@RequestParam Integer authorId, @RequestParam String authorName){
-        Authors editAuthor = authorsService.findById(authorId).get();
-        editAuthor.setName(authorName);
-        authorsService.saveAuthor(editAuthor);
+//        Authors editAuthor = authorsService.findById(authorId).get();
+//        editAuthor.setName(authorName);
+//        authorsService.saveAuthor(editAuthor);
+        authorsService.saveAuthor(authorId, authorName);
         return "redirect:/authors";
     }
 }
