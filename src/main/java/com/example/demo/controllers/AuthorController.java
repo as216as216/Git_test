@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.AuthorDTO;
 import com.example.demo.models.Authors;
 import com.example.demo.services.AuthorsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class AuthorController {
 
     @GetMapping("/authors")
     public String authors(Model model){
-        List<Authors> authorsList = authorsService.findAll();
+        List<AuthorDTO> authorsList = authorsService.findAll();
         model.addAttribute("authorsList", authorsList);
         return "catalogAuthors";
     }

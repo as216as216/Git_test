@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.AuthorDTO;
+import com.example.demo.dto.BooksDTO;
 import com.example.demo.models.Authors;
 import com.example.demo.models.Books;
 import com.example.demo.services.AuthorsService;
@@ -28,14 +30,14 @@ public class BookController {
 
     @GetMapping("/books")
     public String books(Model model) {
-        List<Books> books = booksService.findAll();
+        List<BooksDTO> books = booksService.findAll();
         model.addAttribute("books", books);
         return "books";
     }
 
     @GetMapping("/book/create")
     public String bookCreateForm(Model model){
-        List<Authors> allAuthors = authorsService.findAll();
+        List<AuthorDTO> allAuthors = authorsService.findAll();
         model.addAttribute("allAuthors", allAuthors);
         return "bookCreateForm";
     }
@@ -58,7 +60,7 @@ public class BookController {
     public String bookEditForm(Model model, @RequestParam(value = "bookId") Integer bookId){
         Optional<Books> curBook = booksService.findById(bookId);
         model.addAttribute("curBook", curBook.get());
-        List<Authors> allAuthors = authorsService.findAll();
+        List<AuthorDTO> allAuthors = authorsService.findAll();
         model.addAttribute("allAuthors", allAuthors);
         return "bookEditForm";
     }

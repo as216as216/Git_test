@@ -13,7 +13,7 @@ public class Authors {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "bookAuthors",fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "bookAuthors",fetch = FetchType.LAZY)
     public List<Books> authorsBooks;
 
     public Integer getId() {

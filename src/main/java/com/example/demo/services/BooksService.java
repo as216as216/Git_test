@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.dto.BooksDTO;
+import com.example.demo.mappers.BookMapper;
 import com.example.demo.models.Books;
 import com.example.demo.repository.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,9 @@ public class BooksService {
     @Autowired
     private EntityManager em;
 
-    public List<Books> findAll(){
-        return booksRepository.findAll();
+    public List<BooksDTO> findAll(){
+        List<Books> allBooks = booksRepository.findAll();
+        return BookMapper.INSTANCE.toBookListDTO(allBooks);
     }
 
     public void saveBook(Books book){

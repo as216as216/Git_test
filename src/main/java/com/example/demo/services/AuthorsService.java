@@ -35,9 +35,9 @@ public class AuthorsService {
         }
     }
 
-    public AuthorDTO findAll(){
+    public List<AuthorDTO> findAll(){
         List<Authors> authors = authorsRepository.findAll();
-        return AuthorMapper.INSTANCE.toDTO(authors);
+        return AuthorMapper.INSTANCE.toAuthorListDTO(authors);
     }
 
     public Optional<Authors> findById(Integer authorId){
