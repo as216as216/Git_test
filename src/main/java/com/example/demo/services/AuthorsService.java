@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -23,16 +24,16 @@ public class AuthorsService {
     }
 
     public void saveAuthor(Integer authorId, String authorName){
+        Authors author;
         if (authorId == 0) { // создаём нового автора
-            Authors author = new Authors();
-            author.setName(authorName); // не понимаю, почему, если эту строку вынести за пределы if, то IDEA ругается
+            author = new Authors();
             authorsRepository.save(author);
         }
         else { // редактируем автора
-            Authors author = this.findById(authorId).get();
-            author.setName(authorName); // не понимаю, почему, если эту строку вынести за пределы if, то IDEA ругается
+            author = this.findById(authorId).get();
             authorsRepository.save(author);
         }
+        author.setName(authorName);
     }
 
     public List<AuthorDTO> findAll(){
@@ -41,7 +42,10 @@ public class AuthorsService {
     }
 
     public Optional<Authors> findById(Integer authorId){
-        return authorsRepository.findById(authorId);
+        Optional<Authors> a =  authorsRepository.findById(authorId);
+        if (!a.isPresent())
+                throw new NoSuchElementException("Автор не найден в БД!");
+        return a;
     }
 
     public List<Authors> findAllById(List<Integer> authorsIds){

@@ -54,9 +54,6 @@ public class AuthorController {
 
     @PostMapping("/author/edit")
     public String authorEdit(@RequestParam Integer authorId, @RequestParam String authorName){
-//        Authors editAuthor = authorsService.findById(authorId).get();
-//        editAuthor.setName(authorName);
-//        authorsService.saveAuthor(editAuthor);
         authorsService.saveAuthor(authorId, authorName);
         return "redirect:/authors";
     }
