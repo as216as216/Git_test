@@ -47,7 +47,7 @@ public class AuthorController {
 
     @GetMapping("/author/edit")
     public String authoEditForm(Model model, @RequestParam Integer authorId){
-        Authors author = authorsService.findById(authorId).get();
+        Authors author = authorsService.findById(authorId);
         model.addAttribute("author", author);
         return "authorEditForm";
     }

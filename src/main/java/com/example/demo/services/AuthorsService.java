@@ -27,13 +27,12 @@ public class AuthorsService {
         Authors author;
         if (authorId == 0) { // создаём нового автора
             author = new Authors();
-            authorsRepository.save(author);
         }
         else { // редактируем автора
-            author = this.findById(authorId).get();
-            authorsRepository.save(author);
+            author = this.findById(authorId);
         }
         author.setName(authorName);
+        authorsRepository.save(author);
     }
 
     public List<AuthorDTO> findAll(){
@@ -41,11 +40,8 @@ public class AuthorsService {
         return AuthorMapper.INSTANCE.toAuthorListDTO(authors);
     }
 
-    public Optional<Authors> findById(Integer authorId){
-        Optional<Authors> a =  authorsRepository.findById(authorId);
-        if (!a.isPresent())
-                throw new NoSuchElementException("Автор не найден в БД!");
-        return a;
+    public Authors findById(Integer authorId){
+        return authorsRepository.findById(authorId).orElseThrow(() -> new NoSuchElementException("Автор не найден в БД!"));
     }
 
     public List<Authors> findAllById(List<Integer> authorsIds){
