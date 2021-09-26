@@ -6,18 +6,16 @@
     <html lang="en">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <body>
-    <h1> Страница Авторы</h1>
-    <a href="/">Главная</a>
-    <div>
-        <b>${curBook.name}</b>
-        <br>
-        <br>
-    </div>
-    <c:forEach items="${curBook.bookAuthors}" var="author">
-        <div>
-            <li>${author.name}</li>
-        </div>
-    </c:forEach>
+    <h1> Главная страница</h1>
+    Версия 0.1 <br>
+    ${model.version}
+
+    <br>
+    <a href="/books">Каталог книг</a>
+    <br>
+    <a href="/authors">Справочник авторов</a>
+
+
     </body>
     </html>
 </root>
